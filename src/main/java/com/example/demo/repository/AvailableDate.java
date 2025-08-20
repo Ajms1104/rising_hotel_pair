@@ -21,7 +21,7 @@ public class AvailableDate {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
-    private com.example.hotel.domain.room.Room room;
+    private String room;
 
     // 예약이 되면 booking_id가 채워짐
     @ManyToOne(fetch = FetchType.LAZY)

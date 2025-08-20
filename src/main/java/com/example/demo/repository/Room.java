@@ -1,8 +1,5 @@
-// src/main/java/com/example/hotel/domain/room/Room.java
-package com.example.hotel.domain.room;
+package com.example.demo.repository;
 
-import com.example.demo.repository.AvailableDate;
-import com.example.demo.repository.RoomType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +18,7 @@ public class Room {
     private Integer id;
     private Integer roomNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 

@@ -29,7 +29,7 @@ public class Booking {
     private Boolean isWalkIn;
     private String specialRequests;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
