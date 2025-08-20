@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.controller.dto.BookingCancelResponseDto;
-import com.example.demo.repository.BookingCancelRepository;
+import com.example.demo.controller.dto.BookingResponseDto;
+import com.example.demo.repository.BookingRepository;
 import com.example.demo.repository.entity.Booking;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 
-public class BookingCancelService { //예약 취소 서비스
-    private final BookingCancelRepository bookingCancelRepository; //Repository
+public class BookingService { //예약 취소 서비스
+    private final BookingRepository bookingCancelRepository; //Repository
 
     @Transactional
-    public BookingCancelResponseDto cancelBooking(Integer bookingId, Integer userId) {
+    public BookingResponseDto cancelBooking(Integer bookingId, Integer userId) {
 
         // 예약 ID 못 찾을 경우
         Booking booking = bookingCancelRepository.findById(bookingId)
@@ -36,6 +36,6 @@ public class BookingCancelService { //예약 취소 서비스
         booking.setStatus("CANCELLED");
 
         // 8. 성공 응답 DTO
-        return BookingCancelResponseDto.from(booking);
+        return BookingResponseDto.from(booking);
     }
 }
