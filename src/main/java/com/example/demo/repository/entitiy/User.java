@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.repository.entitiy;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
