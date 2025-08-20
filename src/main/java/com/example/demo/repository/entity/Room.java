@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/com/example/demo/repository/entity/Room.java
 package com.example.demo.repository.entity;
+========
+package com.example.demo.repository.entitiy;
+>>>>>>>> origin/main:src/main/java/com/example/demo/repository/entitiy/Room.java
 
 import jakarta.persistence.*;
 import lombok.Getter;
