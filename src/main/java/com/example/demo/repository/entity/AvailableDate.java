@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
