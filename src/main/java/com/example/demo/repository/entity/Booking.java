@@ -1,7 +1,5 @@
 
-package com.example.demo.repository.entitiy;
->>>>>>>> origin/main:src/main/java/com/example/demo/repository/entitiy/Booking.java
-
+package com.example.demo.repository.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.Getter;

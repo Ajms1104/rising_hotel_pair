@@ -1,8 +1,5 @@
-<<<<<<<< HEAD:src/main/java/com/example/demo/repository/entity/RoomType.java
 package com.example.demo.repository.entity;
-========
-package com.example.demo.repository.entitiy;
->>>>>>>> origin/main:src/main/java/com/example/demo/repository/entitiy/RoomType.java
+
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

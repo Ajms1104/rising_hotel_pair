@@ -1,8 +1,6 @@
-<<<<<<<< HEAD:src/main/java/com/example/demo/repository/entity/AvailableDate.java
+
 package com.example.demo.repository.entity;
-========
-package com.example.demo.repository.entitiy;
->>>>>>>> origin/main:src/main/java/com/example/demo/repository/entitiy/AvailableDate.java
+
 
 import jakarta.persistence.*;
 import lombok.Getter;
