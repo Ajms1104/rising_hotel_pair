@@ -1,29 +1,38 @@
 package com.example.demo.controller.dto;
 
+
+import com.example.demo.repository.entity.AvailableDate;
 import com.example.demo.repository.entity.Booking;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
+import java.time.LocalDate;
+import java.util.List;
+
 @AllArgsConstructor
-public class BookingResponseDto { //예약 취소 응답 Dto
-    //클라이언트에게 예약 취소 상태 반환할 때 사용할 것
-    private Integer bookingId; //예약 ID
-    private Integer userId; //유저 ID
-    private String status; //예약 상태
+public class BookingResponseDto {
 
-    //예약 취소 시간은 가져오는 게 좋아보인다.
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatedAt;
+    private Integer reservationId;
 
-    public static BookingResponseDto from (Booking entity){
+    private LocalDate bookingDate;
+    private Integer hotelId;
+    private List<RoomResponseDto> rooms;
+    private Integer userId;
+    private String status;
+
+// 복습
+    public static BookingResponseDto from(Booking booking) {
+        List<AvailableDate> reservedDates = booking.getReservedDates();
+        List<RoomResponseDto> rooms = reservedDates.stream()
+                .map(RoomResponseDto::from)
+                .toList();
+
         return new BookingResponseDto(
-            entity.getId(),
-            entity.getUser().getId(),
-            entity.getStatus(),
-            entity.getUpdatedAt()
+                booking.getId(), // 예약 아이디
+                booking.getBookingDate(), // 예약일
+                booking.getHotel().getId(), // 호텔 Id
+                rooms, // roomNumber, roomType, price
+                booking.getUser().getId(), // user 아이디
+                booking.getStatus() // 예약완료 반환
         );
     }
 }
