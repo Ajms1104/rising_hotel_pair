@@ -25,7 +25,6 @@ public class HotelController {
         return ResponseEntity.ok(hotels);
     }
 
-
     // 2. 단일 호텔 상세 정보 조회 API
     @GetMapping("/{hotelId}") //ex : api/hotelId/date/2025-08-21
     public ResponseEntity<HotelDetailResponseDto> getHotelDetail(

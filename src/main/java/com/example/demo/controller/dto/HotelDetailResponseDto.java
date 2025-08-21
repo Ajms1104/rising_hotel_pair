@@ -25,11 +25,13 @@ public class HotelDetailResponseDto { //호텔 단일(Single) 조회 응답 DTO
     //2. 해당 방의 예약가능 상태 및 가격
     private List<RoomDetailResponseDto> roomDetail;
 
-    public static HotelDetailResponseDto from (Hotel entity){
-        List<RoomTypes> roomTypes = entity.getRoomTypes();
-        List<AvailableDate> availableDates = 
-        List<RoomDetailResponseDto> roomDetail
-
+    public static HotelDetailResponseDto from(Hotel entity) {
+        // Hotel → RoomType → Room → AvailableDate 평탄화 (FlatMap)
+        List<RoomDetailResponseDto> roomDetail = entity.getRoomTypes().stream()
+            .flatMap(roomType -> roomType.getRooms().stream()) // RoomType → Room
+            .flatMap(room -> room.getAvailableDates().stream()) // Room → AvailableDate
+            .map(RoomDetailResponseDto::from) // AvailableDate → RoomDetailResponseDto
+            .toList();
         return new HotelDetailResponseDto(
             entity.getId(),
             entity.getName(),
@@ -39,5 +41,6 @@ public class HotelDetailResponseDto { //호텔 단일(Single) 조회 응답 DTO
             roomDetail
         );
     }
+
 
 }
