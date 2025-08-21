@@ -54,14 +54,7 @@ public class HotelService {
 
             // 해당 날짜에 룸이 없을 경우
             if (roomIds.isEmpty()) {
-                result.add(HotelSimpleResponseDto.unavailable(
-                        hotel.getId(),
-                        hotel.getName(),
-                        hotel.getRegion(),
-                        hotel.getNation(),
-                        hotel.getRating()
-                        )
-                );
+                result.add(HotelSimpleResponseDto.unavailable(hotel));
                 continue; // 다음 호텔로 진행
             }
 
@@ -71,14 +64,7 @@ public class HotelService {
 
             // 가능한 날짜가 없는 경우
             if (availableDates.isEmpty()) {
-                result.add(HotelSimpleResponseDto.unavailable(
-                        hotel.getId(),
-                        hotel.getName(),
-                        hotel.getRegion(),
-                        hotel.getNation(),
-                        hotel.getRating()
-                        )
-                );
+                result.add(HotelSimpleResponseDto.unavailable(hotel));
                 continue; // 다음 호텔로 진행
             }
 
@@ -97,13 +83,7 @@ public class HotelService {
             // 타입별 최저가 중에서 전체 최저가 찾기
             if (minByRoomType.isEmpty()) {
                 // 예상치 못한 상황이지만 방어 코드 추가
-                result.add(HotelSimpleResponseDto.unavailable(
-                        hotel.getId(),
-                        hotel.getName(),
-                        hotel.getRegion(),
-                        hotel.getNation(),
-                        hotel.getRating()
-                ));
+                result.add(HotelSimpleResponseDto.unavailable(hotel));
                 continue;
             }
 
@@ -115,16 +95,7 @@ public class HotelService {
             }
 
             // 최종 응답 생성
-            result.add(HotelSimpleResponseDto.available(
-                    hotel.getId(),
-                    hotel.getName(),
-                    hotel.getRegion(),
-                    hotel.getNation(),
-                    hotel.getRating(),
-                    overallMin.getRoom().getRoomType().getId(),
-                    overallMin.getRoom().getRoomType().getRoomTypes(),
-                    overallMin.getPrice()
-            ));
+            result.add(HotelSimpleResponseDto.available(hotel, overallMin));
         }
 
         return result;
