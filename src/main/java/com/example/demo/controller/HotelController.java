@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.dto.HotelDetailResponseDto;
 import com.example.demo.controller.dto.HotelSimpleResponseDto;
 import com.example.demo.service.HotelService;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +27,12 @@ public class HotelController {
 
 
     // 2. 단일 호텔 상세 정보 조회 API
-    @GetMapping("/{hotelId}")
+    @GetMapping("/{hotelId}") //ex : api/hotelId/date/2025-08-21
     public ResponseEntity<HotelDetailResponseDto> getHotelDetail(
-            @PathVariable Integer hotelId,
-            @RequestParam LocalDate date
+            @PathVariable
+            Integer hotelId,
+            @RequestParam
+            LocalDate date
     ) {
         HotelDetailResponseDto hotel = hotelService.getHotelDetail(hotelId, date);
         return ResponseEntity.ok(hotel);

@@ -17,12 +17,12 @@ public class RoomType {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String roomTypes;
+    private String roomType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
     @OneToMany(mappedBy = "roomType")
-    private List rooms = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
 }

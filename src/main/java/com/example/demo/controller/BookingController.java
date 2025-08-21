@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.controller.dto.BookingResponseDto;
+import com.example.demo.controller.dto.BookingCancelResponseDto;
 import com.example.demo.service.BookingService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -18,17 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class BookingController { //예약 취소 Controller
-    BookingService bookingCancelService;
+public class BookingController {
+    BookingService bookingService;
 
+    //예약 취소 Controller
     @DeleteMapping("/{bookingId}") //ex : api/bookings/bookingId/123
-    public ResponseEntity<BookingResponseDto> cancelBooking(
+    public ResponseEntity<BookingCancelResponseDto> cancelBooking(
         @PathVariable
         Integer bookingId,
         @RequestParam
         Integer userId
         ){
-        BookingResponseDto responseDto = bookingCancelService.cancelBooking(bookingId, userId);
+        BookingCancelResponseDto responseDto = bookingService.cancelBooking(bookingId, userId);
         return ResponseEntity.ok(responseDto);
     }
 

@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class BookingResponseDto { //예약 취소 응답 Dto
+public class BookingCancelResponseDto { //예약 취소 응답 Dto
     //클라이언트에게 예약 취소 상태 반환할 때 사용할 것
     private Integer bookingId; //예약 ID
     private Integer userId; //유저 ID
@@ -18,8 +18,8 @@ public class BookingResponseDto { //예약 취소 응답 Dto
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
-    public static BookingResponseDto from (Booking entity){
-        return new BookingResponseDto(
+    public static BookingCancelResponseDto from (Booking entity){
+        return new BookingCancelResponseDto(
             entity.getId(),
             entity.getUser().getId(),
             entity.getStatus(),
