@@ -1,4 +1,15 @@
 package com.example.demo.repository;
 
-public class AvailableDateRepository {
+import com.example.demo.repository.entity.AvailableDate;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public interface AvailableDateRepository extends JpaRepository <AvailableDate,Integer>{
+    List<AvailableDate> findAllByAvailableDate(String availableDate);
+    List<AvailableDate> findAllByAvailableDateBetween(String availableDate1, String availableDate2);
+    List<AvailableDate> findAllByRoomId(Integer roomId);
+    List<AvailableDate> findAllByBookingId(Integer bookingId);
+    List<AvailableDate> findAllByIsAvailableTrue(Boolean isAvailable);
 }
