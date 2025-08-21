@@ -12,4 +12,13 @@ public interface AvailableDateRepository extends JpaRepository <AvailableDate,In
     List<AvailableDate> findAllByRoomId(Integer roomId);
     List<AvailableDate> findAllByBookingId(Integer bookingId);
     List<AvailableDate> findAllByIsAvailableTrue(Boolean isAvailable);
+
+    /*
+    SELECT *
+    FROM available_date
+    WHERE room_id IN ( ... )
+    AND date = ?
+    AND is_available = true;
+     */
+    List<AvailableDate> findByRoomIdInAndDateAndIsAvailableTrue(List<Integer> roomIds, LocalDate date);
 }

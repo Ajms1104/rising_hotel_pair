@@ -10,7 +10,7 @@ import lombok.AccessLevel;
 import java.time.LocalDate;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 public class AvailableDate {
 
@@ -23,7 +23,7 @@ public class AvailableDate {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
-    private String room;
+    private Room room;
 
     // 예약이 되면 booking_id가 채워짐
     @ManyToOne(fetch = FetchType.LAZY)

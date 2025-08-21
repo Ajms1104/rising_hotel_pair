@@ -18,4 +18,15 @@ public class HotelSimpleResponseDto {
     private Integer cheapestRoomTypeId; //nullable
     private String cheapestRoomTypeName; //nullable
     private Integer Price; //nullable
+
+    public static HotelSimpleResponseDto unavailable(Integer hotelId, String name, String region, String nation, Double rating) {
+        return new HotelSimpleResponseDto(
+                hotelId, name, region, nation, rating,
+                false, null, null, null);
+    }
+
+    public static HotelSimpleResponseDto available(Integer hotelId, String name, String region, String nation, Double rating, Integer roomTypeId, String roomTypeName, Integer price) {
+        return new HotelSimpleResponseDto(hotelId, name, region, nation, rating,
+                true, roomTypeId, roomTypeName, price);
+}
 }
