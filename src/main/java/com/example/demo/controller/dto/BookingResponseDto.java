@@ -2,18 +2,15 @@ package com.example.demo.controller.dto;
 
 import com.example.demo.repository.entity.AvailableDate;
 import com.example.demo.repository.entity.Booking;
-import lombok.AccessLevel;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+
 public class BookingResponseDto {
 
     private Integer reservationId;
@@ -31,21 +28,20 @@ public class BookingResponseDto {
     public static BookingResponseDto from(Booking booking) {
         List<AvailableDate> reservedDates = booking.getReservedDates();
         List<RoomResponseDto> rooms = reservedDates.stream()
-                .map(RoomResponseDto::from)
-                .toList();
-
+            .map(RoomResponseDto::from)
+            .toList();
         return new BookingResponseDto(
-                booking.getId(), // 예약 아이디
-                booking.getBookingDate(), // 예약일
-                booking.getHotel().getId(), // 호텔 Id
-                booking.getGuestNumber(),  // 총 인원 수
-                booking.getIsWalkIn(),   // 도보방문
-                booking.getSpecialRequests(), // 요청사항
-                rooms, // roomNumber, roomType, price
-                booking.getCheckIn(),
-                booking.getCheckOut(),
-                booking.getUser().getId(), // user 아이디
-                booking.getStatus() // 예약완료 반환
+            booking.getId(), // 예약 아이디
+            booking.getBookingDate(), // 예약일
+            booking.getHotel().getId(), // 호텔 Id
+            booking.getGuestNumber(),  // 총 인원 수
+            booking.getIsWalkIn(),   // 도보방문
+            booking.getSpecialRequests(), // 요청사항
+            rooms, // roomNumber, roomType, price
+            booking.getCheckIn(),
+            booking.getCheckOut(),
+            booking.getUser().getId(), // user 아이디
+            booking.getStatus()// 예약완료 반환
         );
     }
 }

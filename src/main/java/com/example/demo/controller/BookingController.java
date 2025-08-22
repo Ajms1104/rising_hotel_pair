@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.controller.dto.BookingCancelResponseDto;
 import com.example.demo.controller.dto.BookingRequestDto;
 import com.example.demo.controller.dto.BookingResponseDto;
@@ -16,14 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class BookingController { //예약 취소 Controller
-    private final BookingService bookingService;
 
-    @DeleteMapping("/{bookingId}") //ex : api/bookings/bookingId/123
+public class BookingController {
+    BookingService bookingService;
+
+    //예약 취소 Controller | 담당 조아정
+    @DeleteMapping("/{bookingId}") //ex : api/bookings/bookingId/123?userId=10
     public ResponseEntity<BookingCancelResponseDto> cancelBooking(
-        @PathVariable
+        @PathVariable //URL 경로에 있는 값은 매서드 파라미터로 매팅
         Integer bookingId,
-        @RequestParam
+        @RequestParam // ?{userId}=value
         Integer userId
         ){
         BookingCancelResponseDto responseDto = bookingService.cancelBooking(bookingId, userId);

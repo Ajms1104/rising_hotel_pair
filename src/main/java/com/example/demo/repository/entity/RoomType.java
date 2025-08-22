@@ -28,7 +28,6 @@ public class RoomType {
 
     @OneToMany(mappedBy = "roomType")
     private List<Room> rooms = new ArrayList<>();
-    // mappedBy 사용시 DB에서 관리 x 메모리 상 연결만 해줌
 
     public static RoomType create(String roomTypes, Hotel hotel){
         return new RoomType(

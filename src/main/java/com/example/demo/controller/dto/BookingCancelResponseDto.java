@@ -1,8 +1,7 @@
+//담당 : 조아정
 package com.example.demo.controller.dto;
 
 import com.example.demo.repository.entity.Booking;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,16 +13,12 @@ public class BookingCancelResponseDto { //예약 취소 응답 Dto
     private Integer userId; //유저 ID
     private String status; //예약 상태
 
-    //예약 취소 시간은 가져오는 게 좋아보인다.
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatedAt;
 
     public static BookingCancelResponseDto from (Booking entity){
         return new BookingCancelResponseDto(
             entity.getId(),
             entity.getUser().getId(),
-            entity.getStatus(),
-            entity.getUpdatedAt()
+            entity.getStatus()
         );
     }
 }

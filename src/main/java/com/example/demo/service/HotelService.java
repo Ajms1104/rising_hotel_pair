@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
+
+import com.example.demo.controller.dto.HotelSingleResponseDto;
+import com.example.demo.controller.dto.RoomDetailResponseDto;
 import com.example.demo.repository.AvailableDateRepository;
 import com.example.demo.repository.HotelRepository;
-import com.example.demo.repository.RoomRepository;
 import com.example.demo.repository.RoomTypeRepository;
 import com.example.demo.repository.entity.AvailableDate;
 import com.example.demo.repository.entity.Hotel;
 import com.example.demo.repository.entity.Room;
 import com.example.demo.repository.entity.RoomType;
-import jakarta.annotation.PostConstruct;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.example.demo.controller.dto.HotelSimpleResponseDto;
@@ -19,13 +19,13 @@ import com.example.demo.controller.dto.HotelSimpleResponseDto;
 import java.time.LocalDate;
 import java.util.*;
 
+
 @Service
 @RequiredArgsConstructor
 public class HotelService {
+    private final AvailableDateRepository availableDateRepository;
     private final HotelRepository hotelRepository;
     private final RoomTypeRepository roomTypeRepository;
-    private final RoomRepository roomRepository;
-    private final AvailableDateRepository availableDateRepository;
 
     /*TODO: 전체 호텔 간단 정보 조회 API
     1. 전체 호텔을 조회한다
@@ -60,7 +60,7 @@ public class HotelService {
 
             // 룸 있을 경우 예약 가능 날짜 조회
             List<AvailableDate> availableDates = availableDateRepository
-                    .findByRoomIdInAndDateAndIsAvailableTrue(roomIds, date);
+                .findByRoomIdInAndDateAndIsAvailableTrue(roomIds, date);
 
             // 가능한 날짜가 없는 경우
             if (availableDates.isEmpty()) {
@@ -97,7 +97,34 @@ public class HotelService {
             // 최종 응답 생성
             result.add(HotelSimpleResponseDto.available(hotel, overallMin));
         }
-
         return result;
+    }
+
+    //2. 단일 호텔 조회 관련 | 담당 조아정
+    @Transactional
+    public HotelSingleResponseDto getHotelSingleDetail(Integer hotelId, LocalDate date) {
+
+        Hotel hotel = hotelRepository.findById(hotelId)
+            // 호텔 ID 못 찾을 경우
+            .orElseThrow(() -> new IllegalArgumentException("해당 호텔을 찾을 수 없습니다. ID: " + hotelId));
+
+        //호텔 ID와 날짜를 기준으로 모든 객실의 예약 가능 정보를 조회
+        List<Integer> roomIds = roomTypeRepository.findByhotel_Id(hotelId).stream()
+            .flatMap(roomType -> roomType.getRooms().stream())
+            .map(Room::getId)
+            .toList();
+        if (roomIds.isEmpty()) {
+            return HotelSingleResponseDto.from(hotel, Collections.emptyList());
+        }
+
+        //날짜별 예약 현황
+        List<AvailableDate> availableDates = availableDateRepository.findByRoomIdInAndDate(roomIds, date);
+
+        // 조회된 정보를 DTO로 변환
+        List<RoomDetailResponseDto> roomDetails = availableDates.stream()
+            .map(RoomDetailResponseDto::from)
+            .collect(Collectors.toList());
+
+    return HotelSingleResponseDto.from(hotel, roomDetails);
     }
 }
