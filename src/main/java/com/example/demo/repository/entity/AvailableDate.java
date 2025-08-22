@@ -8,7 +8,7 @@ import lombok.*;
 import java.time.LocalDate;
 @Setter
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 @AllArgsConstructor
 public class AvailableDate {

@@ -1,5 +1,7 @@
 package com.example.demo.controller.dto;
 
+import com.example.demo.repository.entity.AvailableDate;
+import com.example.demo.repository.entity.Hotel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -18,4 +20,24 @@ public class HotelSimpleResponseDto {
     private Integer cheapestRoomTypeId; //nullable
     private String cheapestRoomTypeName; //nullable
     private Integer Price; //nullable
+
+    public static HotelSimpleResponseDto unavailable(Hotel hotel) {
+        return new HotelSimpleResponseDto(
+                hotel.getId(), hotel.getName(), hotel.getNation(), hotel.getRegion(), hotel.getRating(), 
+                false,
+                null,
+                null,
+                null
+        );
+    }
+
+    public static HotelSimpleResponseDto available(Hotel hotel, AvailableDate availableDate) {
+        return new HotelSimpleResponseDto(
+                hotel.getId(), hotel.getName(), hotel.getNation(), hotel.getRegion(), hotel.getRating(),
+                true,
+                availableDate.getRoom().getRoomType().getId(),
+                availableDate.getRoom().getRoomType().getRoomTypes(),
+                availableDate.getPrice()
+        );
+}
 }
