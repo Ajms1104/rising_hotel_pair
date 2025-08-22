@@ -30,6 +30,7 @@ public class HotelService {
         List<RoomType> roomTypes = roomTypeRepository.findByhotel_Id(hotelId);
 
         //날짜별 예약 현황
-        // 현재 여기까지 개발 완 boolean available = roomType.getTotalRooms() >
+         boolean available = roomType.getTotalRooms() > getReser
+
     }
 }

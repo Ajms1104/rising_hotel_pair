@@ -34,7 +34,6 @@ public class HotelSingleResponseDto { //호텔 단일(Single) 조회 응답 DTO
     }
 
 
-
 //    public static HotelDetailResponseDto from(Hotel entity) {
 //         Hotel → RoomType → Room → AvailableDate 평탄화 (FlatMap)
 //        List<RoomDetailResponseDto> roomDetail = entity.getRoomTypes().stream()
