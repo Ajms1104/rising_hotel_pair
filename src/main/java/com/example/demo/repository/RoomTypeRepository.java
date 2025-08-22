@@ -8,4 +8,5 @@ import java.util.List;
 public interface RoomTypeRepository extends JpaRepository <RoomType,Integer> {
     RoomType findByRoomTypes(String roomTypes);
     List<RoomType> findAllByRoomTypes(String roomTypes);
+    List<RoomType> findByhotel_Id(Integer hotelId);
 }

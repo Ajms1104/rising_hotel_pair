@@ -22,11 +22,11 @@ public class BookingController {
     BookingService bookingService;
 
     //예약 취소 Controller
-    @DeleteMapping("/{bookingId}") //ex : api/bookings/bookingId/123
+    @DeleteMapping("/{bookingId}") //ex : api/bookings/bookingId/123?userId=10
     public ResponseEntity<BookingCancelResponseDto> cancelBooking(
-        @PathVariable
+        @PathVariable //URL 경로에 있는 값은 매서드 파라미터로 매팅
         Integer bookingId,
-        @RequestParam
+        @RequestParam // ?{userId}=value
         Integer userId
         ){
         BookingCancelResponseDto responseDto = bookingService.cancelBooking(bookingId, userId);
