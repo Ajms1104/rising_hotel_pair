@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface RoomTypeRepository extends JpaRepository <RoomType,Integer> {
-
 }
