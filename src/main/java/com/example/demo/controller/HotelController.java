@@ -26,12 +26,12 @@ public class HotelController {
 
 
     // 2. 단일 호텔 상세 정보 조회 API
-    @GetMapping("/{hotelId}")
-    public ResponseEntity<HotelDetailResponseDto> getHotelDetail(
-            @PathVariable Integer hotelId,
-            @RequestParam LocalDate date
-    ) {
-        HotelDetailResponseDto hotel = hotelService.getHotelDetail(hotelId, date);
-        return ResponseEntity.ok(hotel);
-    }
+//    @GetMapping("/{hotelId}")
+//    public ResponseEntity<HotelDetailResponseDto> getHotelDetail(
+//            @PathVariable Integer hotelId,
+//            @RequestParam LocalDate date
+//    ) {
+//        HotelDetailResponseDto hotel = hotelService.getHotelDetail(hotelId, date);
+//        return ResponseEntity.ok(hotel);
+//    }
 }

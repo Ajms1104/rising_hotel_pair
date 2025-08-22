@@ -24,5 +24,5 @@ public class RoomType {
     private Hotel hotel;
 
     @OneToMany(mappedBy = "roomType")
-    private List rooms = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
 }

@@ -8,10 +8,10 @@ import java.util.List;
 
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Integer> {
-    Hotel findByHotelId(Integer hotelId);
-    List<Hotel> findAllByHotelId(Integer hotelId);
-    Hotel findByName(String name);
-    Hotel findByRegion(String region);
-    Hotel findByNation(String nation);
-    Hotel findByRating(Double rating);
+//    Hotel findByHotelId(Integer hotelId);
+//    List<Hotel> findAllByHotelId(Integer hotelId);
+//    Hotel findByName(String name);
+//    Hotel findByRegion(String region);
+//    Hotel findByNation(String nation);
+//    Hotel findByRating(Double rating);
 }
