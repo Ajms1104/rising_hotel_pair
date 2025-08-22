@@ -52,4 +52,3 @@ public class HotelSingleResponseDto { //호텔 단일(Single) 조회 응답 DTO
     }
 
 
-}
