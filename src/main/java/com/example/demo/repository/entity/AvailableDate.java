@@ -3,15 +3,14 @@ package com.example.demo.repository.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.AccessLevel;
+import lombok.*;
 
 import java.time.LocalDate;
-
+@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@AllArgsConstructor
 public class AvailableDate {
 
     @Id
@@ -29,4 +28,19 @@ public class AvailableDate {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     private Booking booking;
+
+    public static AvailableDate create(LocalDate date, Boolean isAvailable, Integer price,Room room, Booking booking){
+        return new AvailableDate(
+                null,
+                date,
+                isAvailable,
+                price,
+                room,
+                booking
+        );
+    }
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
+
 }

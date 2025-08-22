@@ -15,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HotelController {
     private final HotelService hotelService;
-
     // 1. 전체 호텔 간단 정보 조회 API
     @GetMapping("")
     public ResponseEntity<List<HotelSimpleResponseDto>> getHotels(
@@ -26,15 +25,14 @@ public class HotelController {
     }
 
     // 2. 단일 호텔 상세 정보 조회 API
-    @GetMapping("/{hotelId}") //ex : api/hotels/hotelId/456?date=2025-08-22
-    public ResponseEntity<HotelSingleResponseDto> getHotelSingleDetail(
+        @GetMapping("/{hotelId}") //ex : api/hotels/hotelId/456?date=2025-08-22
+        public ResponseEntity<HotelSingleResponseDto> getHotelSingleDetail(
             @PathVariable
-            Integer hotelId,
+                Integer hotelId,
             @RequestParam // ?{date}=value
-            LocalDate date //이렇게만 해도 되나..?
+                LocalDate date //이렇게만 해도 되나..?
     ) {
-        HotelSingleResponseDto hotel = hotelService.getHotelSingleDetail(hotelId, date);
-        //hotelService 호출하여 비즈니스 로직 실행
-        return ResponseEntity.ok(hotel);
+            HotelSingleResponseDto hotel = hotelService.getHotelSingleDetail(hotelId, date);
+            return ResponseEntity.ok(hotel);
     }
 }

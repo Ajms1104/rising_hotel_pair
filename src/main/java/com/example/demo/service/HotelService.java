@@ -17,7 +17,8 @@ public class HotelService {
     private final HotelRepository hotelRepository;
     private final RoomTypeRepository roomTypeRepository;
 
-    //단일 호텔 조회 관련
+
+    //2. 단일 호텔 조회 관련 | 담당 조아정
     @Transactional
     public HotelSingleResponseDto getHotelSingleDetail(Integer hotelId, LocalDate date) {
 
@@ -29,6 +30,6 @@ public class HotelService {
         List<RoomType> roomTypes = roomTypeRepository.findByhotel_Id(hotelId);
 
         //날짜별 예약 현황
-        boolean available = roomType.getTotalRooms() >
+        // 현재 여기까지 개발 완 boolean available = roomType.getTotalRooms() >
     }
 }
