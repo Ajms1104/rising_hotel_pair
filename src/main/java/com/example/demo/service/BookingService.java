@@ -9,9 +9,10 @@ import com.example.demo.repository.entity.*;
 import java.time.LocalDate;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+@Setter
 @Service
 @RequiredArgsConstructor
 
@@ -62,12 +63,11 @@ public class BookingService { //예약 취소 서비스
                 .orElseThrow(() -> new RuntimeException("데이터베이스 내 hotelId가 존재하지 않습니다. hotelId :" + hotelId));
 
         // roomId 조회
-        Integer roomId = request.getRoomTypeId();
-        Room room = roomRepository.findById(roomId)
-                .orElseThrow(() -> new RuntimeException("데이터베이스 내 roomId가 존재하지 않습니다. hotelId :" + roomId));
-
-        //roomTypeId 조회
+        Integer roomNumber = request.getRoomNumber();
         Integer roomTypeId = request.getRoomTypeId();
+        Room room = roomRepository.findByRoomNumberAndRoomTypeId(roomNumber,roomTypeId)
+                .orElseThrow(() -> new RuntimeException("데이터베이스 내 roomId가 존재하지 않습니다. 방호수 :" + roomNumber));
+        //roomTypeId 조회
         RoomType roomType = roomTypeRepository.findById(roomTypeId)
                 .orElseThrow(() -> new RuntimeException("데이터베이스 내 roomTypeId가 존재하지 않습니다. hotelId :" + roomTypeId));
 
@@ -91,6 +91,12 @@ public class BookingService { //예약 취소 서비스
                 user,
                 hotel
         );
+
+
+
+        availableDate.setBooking(booking);
+        // 양방향 매핑 시 Booking에도 연결
+        booking.getReservedDates().add(availableDate);
 
         Booking created = bookingRepository.save(booking);
         return BookingResponseDto.from(created);

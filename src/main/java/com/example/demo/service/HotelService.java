@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.repository.HotelRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

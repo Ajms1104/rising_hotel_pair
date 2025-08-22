@@ -53,7 +53,7 @@ public class Booking {
 
 
     // 예약이 잡은 날짜들(available_date.booking_id 로 연결)
-    @OneToMany(mappedBy = "booking")
+    @OneToMany( mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true )
     private List<AvailableDate> reservedDates = new ArrayList<>();
 
 
@@ -72,7 +72,8 @@ public class Booking {
                 LocalDateTime.now(),
                 user,
                 hotel,
-                Collections.emptyList()
+                new ArrayList<>()
         );
     }
+
 }

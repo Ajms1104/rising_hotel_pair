@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class BookingController { //예약 취소 Controller
-    BookingService bookingService;
+    private final BookingService bookingService;
 
     @DeleteMapping("/{bookingId}") //ex : api/bookings/bookingId/123
     public ResponseEntity<BookingCancelResponseDto> cancelBooking(
@@ -31,6 +31,7 @@ public class BookingController { //예약 취소 Controller
     }
 
     @PostMapping("")
+    @ResponseBody
     public ResponseEntity<BookingResponseDto>create(@RequestBody BookingRequestDto request){
         BookingResponseDto booking = bookingService.reserve(request);
         return ResponseEntity.ok(booking);
