@@ -25,7 +25,7 @@ public class RoomDetailResponseDto {
             entity.getIsAvailable(),
             entity.getDate(),
             entity.getPrice(),
-            entity.getRoom().getRoomType().getRoomType()
+            entity.getRoom().getRoomType().getRoomTypes()
         );
     }
 }
