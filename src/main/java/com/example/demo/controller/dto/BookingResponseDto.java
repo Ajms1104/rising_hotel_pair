@@ -1,29 +1,51 @@
 package com.example.demo.controller.dto;
 
+import com.example.demo.repository.entity.AvailableDate;
 import com.example.demo.repository.entity.Booking;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class BookingResponseDto { //예약 취소 응답 Dto
-    //클라이언트에게 예약 취소 상태 반환할 때 사용할 것
-    private Integer bookingId; //예약 ID
-    private Integer userId; //유저 ID
-    private String status; //예약 상태
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class BookingResponseDto {
 
-    //예약 취소 시간은 가져오는 게 좋아보인다.
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatedAt;
+    private Integer reservationId;
+    private LocalDate bookingDate;
+    private Integer hotelId;
+    private Integer guestNumber;
+    private Boolean isWalkIn;
+    private String specialRequests;
+    private List<RoomResponseDto> rooms;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
+    private Integer userId;
+    private String status;
 
-    public static BookingResponseDto from (Booking entity){
+    public static BookingResponseDto from(Booking booking) {
+        List<AvailableDate> reservedDates = booking.getReservedDates();
+        List<RoomResponseDto> rooms = reservedDates.stream()
+                .map(RoomResponseDto::from)
+                .toList();
+
         return new BookingResponseDto(
-            entity.getId(),
-            entity.getUser().getId(),
-            entity.getStatus(),
-            entity.getUpdatedAt()
+                booking.getId(), // 예약 아이디
+                booking.getBookingDate(), // 예약일
+                booking.getHotel().getId(), // 호텔 Id
+                booking.getGuestNumber(),  // 총 인원 수
+                booking.getIsWalkIn(),   // 도보방문
+                booking.getSpecialRequests(), // 요청사항
+                rooms, // roomNumber, roomType, price
+                booking.getCheckIn(),
+                booking.getCheckOut(),
+                booking.getUser().getId(), // user 아이디
+                booking.getStatus() // 예약완료 반환
         );
     }
 }
